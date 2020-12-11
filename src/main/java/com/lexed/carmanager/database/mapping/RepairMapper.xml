@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lexed.carmanager.database.mapping.RepairMapper" >
+  <resultMap id="BaseResultMap" type="com.lexed.carmanager.database.pojo.Repair" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="cnumber" property="cnumber" jdbcType="VARCHAR" />
+    <result column="carinfo" property="carinfo" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    Id, cnumber, carinfo
+  </sql>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from repair
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from repair
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from repair
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lexed.carmanager.database.pojo.Repair" >
+    insert into repair (Id, cnumber, carinfo
+      )
+    values (#{id,jdbcType=INTEGER}, #{cnumber,jdbcType=VARCHAR}, #{carinfo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lexed.carmanager.database.pojo.Repair" >
+    insert into repair
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="cnumber != null" >
+        cnumber,
+      </if>
+      <if test="carinfo != null" >
+        carinfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cnumber != null" >
+        #{cnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carinfo != null" >
+        #{carinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lexed.carmanager.database.pojo.Repair" >
+    update repair
+    <set >
+      <if test="cnumber != null" >
+        cnumber = #{cnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carinfo != null" >
+        carinfo = #{carinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lexed.carmanager.database.pojo.Repair" >
+    update repair
+    set cnumber = #{cnumber,jdbcType=VARCHAR},
+      carinfo = #{carinfo,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

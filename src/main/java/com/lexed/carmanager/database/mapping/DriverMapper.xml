@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lexed.carmanager.database.mapping.DriverMapper" >
+  <resultMap id="BaseResultMap" type="com.lexed.carmanager.database.pojo.Driver" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="dname" property="dname" jdbcType="VARCHAR" />
+    <result column="dsex" property="dsex" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="ctype" property="ctype" jdbcType="VARCHAR" />
+    <result column="dstatus" property="dstatus" jdbcType="VARCHAR" />
+    <result column="uesrname" property="uesrname" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="primary" property="primary" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, dname, dsex, idcard, ctype, dstatus, uesrname, password, primary
+  </sql>
+  
+  <select id="selectALl" resultMap="BaseResultMap">
+  	 select *  from driver
+  </select>
+  
+  <select id="selectByUesrname" resultMap="BaseResultMap" parameterType="String">
+  	select * from driver where uesrname = #{uesrname}
+   </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from driver
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from driver
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lexed.carmanager.database.pojo.Driver" >
+    insert into driver (Id, dname, dsex, 
+      idcard, ctype, dstatus, 
+      uesrname, password, primary
+      )
+    values (#{id,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{dsex,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{ctype,jdbcType=VARCHAR}, #{dstatus,jdbcType=VARCHAR}, 
+      #{uesrname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{primary,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lexed.carmanager.database.pojo.Driver" >
+    insert into driver
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="dname != null" >
+        dname,
+      </if>
+      <if test="dsex != null" >
+        dsex,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="ctype != null" >
+        ctype,
+      </if>
+      <if test="dstatus != null" >
+        dstatus,
+      </if>
+      <if test="uesrname != null" >
+        uesrname,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="primary != null" >
+        primary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="dsex != null" >
+        #{dsex,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="dstatus != null" >
+        #{dstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="uesrname != null" >
+        #{uesrname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="primary != null" >
+        #{primary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lexed.carmanager.database.pojo.Driver" >
+    update driver
+    <set >
+      <if test="dname != null" >
+        dname = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="dsex != null" >
+        dsex = #{dsex,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        ctype = #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="dstatus != null" >
+        dstatus = #{dstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="uesrname != null" >
+        uesrname = #{uesrname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="primary != null" >
+        primary = #{primary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lexed.carmanager.database.pojo.Driver" >
+    update driver
+    set dname = #{dname,jdbcType=VARCHAR},
+      dsex = #{dsex,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      ctype = #{ctype,jdbcType=VARCHAR},
+      dstatus = #{dstatus,jdbcType=VARCHAR},
+      uesrname = #{uesrname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      primary = #{primary,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-3.3.1.js" type="text/javascript" charset="UTF-8"></script>
+	</head>
+
+	<body>
+	
+			<p id="msg"></p>			
+			<input type="text" id="uesrname" placeholder="请输入用户名" />
+			<input type="password" id="password" placeholder="请输入密码" />
+			<button id="login">登录</button>
+			
+			<script type="text/javascript">
+				$(function() {// jquery的onload事件
+					// 注意点击事件
+					$("#login").click(function() {
+						// 获取表单控件的值
+						var uesrname = $("#uesrname").val();
+						var password = $("#password").val();
+						console.log(uesrname);
+						// 通过ajax进行数据的发送
+						$.ajax({
+							url:"LoginServlet",//发送地址
+							type:"POST",//请求方式
+							datatype:"json",//服务器可能返回的数据类型
+							data:{uesrname:uesrname,password:password},
+							success:function(data){//接受响应的方法
+								if(data.status == 1){
+									location.href = "manager.html";//跳转页面
+								}else if(data.status == 2){
+									$("#msg").text(data.msg);//错误提示
+								}else if(data.status == 0){
+									//跳转到重密码页面
+									location.href="repwd.html";
+								}
+								
+							}
+						});
+					});
+				});
+				
+			</script>
+		
+	</body>
+
+</html>

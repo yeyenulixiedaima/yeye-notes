@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lexed.carmanager.database.mapping.DynamicMapper" >
+  <resultMap id="BaseResultMap" type="com.lexed.carmanager.database.pojo.Dynamic" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="cnumber" property="cnumber" jdbcType="VARCHAR" />
+    <result column="dtime" property="dtime" jdbcType="VARCHAR" />
+    <result column="longtitude" property="longtitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, cnumber, dtime, longtitude, latitude, position
+  </sql>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from dynamic
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dynamic
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dynamic
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lexed.carmanager.database.pojo.Dynamic" >
+    insert into dynamic (Id, cnumber, dtime, 
+      longtitude, latitude, position
+      )
+    values (#{id,jdbcType=INTEGER}, #{cnumber,jdbcType=VARCHAR}, #{dtime,jdbcType=VARCHAR}, 
+      #{longtitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lexed.carmanager.database.pojo.Dynamic" >
+    insert into dynamic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="cnumber != null" >
+        cnumber,
+      </if>
+      <if test="dtime != null" >
+        dtime,
+      </if>
+      <if test="longtitude != null" >
+        longtitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cnumber != null" >
+        #{cnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null" >
+        #{dtime,jdbcType=VARCHAR},
+      </if>
+      <if test="longtitude != null" >
+        #{longtitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lexed.carmanager.database.pojo.Dynamic" >
+    update dynamic
+    <set >
+      <if test="cnumber != null" >
+        cnumber = #{cnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null" >
+        dtime = #{dtime,jdbcType=VARCHAR},
+      </if>
+      <if test="longtitude != null" >
+        longtitude = #{longtitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lexed.carmanager.database.pojo.Dynamic" >
+    update dynamic
+    set cnumber = #{cnumber,jdbcType=VARCHAR},
+      dtime = #{dtime,jdbcType=VARCHAR},
+      longtitude = #{longtitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
